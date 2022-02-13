@@ -1,0 +1,23 @@
+fieldset {
+	background-color: #00fff3;
+	margin-bottom: 15px;
+}
+
+legend{
+	background-color: red;
+	color: white;
+}
+
+fieldset > input {
+	background-color: yellow;
+}
+
+h1 {
+	color: blue;
+	text-align: center;
+	text-shadow: 1px 1px yellow;
+}
+
+.rosa {
+	background-color: pink;
+}
