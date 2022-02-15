@@ -1,6 +1,5 @@
 'use strict';
 
-
 const codigospostales = new Map ([
 	[1,"ALAVA"],
 	[2,"ALBACETE"],
@@ -56,43 +55,49 @@ const codigospostales = new Map ([
 	[52,"MELILLA"]]);
 
 function mostrarValoracion(){
-	alert("Has valorado con " + document.getElementById("valoracion").value +" puntos")
+	var valoracion = document.getElementById("valoracion").value;
+	alert("Has valorado con " + valoracion +" puntos");
 }
 
 function mostrarCuenta(){
-	var cuenta = document.getElementById("Pais").value+document.getElementById("CIban").value+"-"+document.getElementById("entidad").value+"-"
-	+document.getElementById("sucursal").value+"-"+document.getElementById("Dc").value+"-"
-	+document.getElementById("cuenta").value;
+	var pais = document.getElementById("Pais").value;
+	var CIban = document.getElementById("CIban").value;
+	var entidad = document.getElementById("entidad").value;
+	var sucursal = document.getElementById("sucursal").value;
+	var Dc = document.getElementById("Dc").value;
+	var Ncuenta = document.getElementById("cuenta").value;
+	var cuenta = pais+CIban+"-"+entidad+"-"+sucursal+"-"+Dc+"-"
+	+Ncuenta;
 	alert("Le informamos que su cuenta bancaria es: " + cuenta );
 }
 
 function mostrarDia(){
-var diaSemana = new Date(document.getElementById("fecha").value).getDay();
-switch (diaSemana){
- case 1:
-   alert("La fecha seleccionada en el elemento fecha es un Lunes");
-   break;
- case 2:
-   alert("La fecha seleccionada en el elemento fecha es un Martes");
-   break;
- case 3:
-   alert("La fecha seleccionada en el elemento fecha es un Miercoles");
-   break;
- case 4:
-   alert("La fecha seleccionada en el elemento fecha es un Jueves");
-   break;
- case 5:
-   alert("La fecha seleccionada en el elemento fecha es un Viernes");
-   break;
- case 6:
-   alert("La fecha seleccionada en el elemento fecha es un Sabado");
-   break;
- case 0:
-   alert("La fecha seleccionada en el elemento fecha es un Domingo"); 
-   break;
+	var fecha = document.getElementById("fecha").value;
+	var diaSemana = new Date(fecha).getDay();
+	switch (diaSemana){
+	 case 1:
+	   alert("La fecha seleccionada en el elemento fecha es un Lunes");
+	   break;
+	 case 2:
+	   alert("La fecha seleccionada en el elemento fecha es un Martes");
+	   break;
+	 case 3:
+	   alert("La fecha seleccionada en el elemento fecha es un Miercoles");
+	   break;
+	 case 4:
+	   alert("La fecha seleccionada en el elemento fecha es un Jueves");
+	   break;
+	 case 5:
+	   alert("La fecha seleccionada en el elemento fecha es un Viernes");
+	   break;
+	 case 6:
+	   alert("La fecha seleccionada en el elemento fecha es un Sabado");
+	   break;
+	 case 0:
+	   alert("La fecha seleccionada en el elemento fecha es un Domingo"); 
+	   break;
    }   
 }
-
 
 function validarFormulario(){
 
@@ -101,62 +106,71 @@ function validarFormulario(){
 	var errores = false;
 
 	//-----Validaciones que comprueban que los campos venga informados----------//
+	var datosPers = document.getElementById("DatosPers");
 
 	var nombre = document.getElementById("nombre");
+	var errorNombre = document.getElementById("errorNombre");
 	if (nombre.value.length == 0) {
-		if (!document.getElementById("errorNombre")) {
+		if (!errorNombre) {
 			var error = document.createElement("label");
 			error.style.color = "red";
 			error.id = "errorNombre";
 			error.classList.add("etiquetasError");
 			var contenido = document.createTextNode("CAMPO REQUERIDO");
 			error.appendChild(contenido);
-			document.getElementById("DatosPers").insertBefore(error, nombre.nextElementSibling);
+			datosPers.insertBefore(error, nombre.nextElementSibling);
+			errorNombre = document.getElementById("errorNombre");
 		}
 		nombre.focus();
 		errores = true;
 	}
 
 	var apellidos = document.getElementById("apellidos");
+	var errorApellidos = document.getElementById("errorApellidos");
 	if (apellidos.value.length == 0) {
-		if (!document.getElementById("errorApellidos")) {
+		if (!errorApellidos) {
 			var error = document.createElement("label");
 			error.style.color = "red";
 			error.id = "errorApellidos";
 			error.classList.add("etiquetasError");
 			var contenido = document.createTextNode("CAMPO REQUERIDO");
 			error.appendChild(contenido);
-			document.getElementById("DatosPers").insertBefore(error, apellidos.nextElementSibling);
+			datosPers.insertBefore(error, apellidos.nextElementSibling);
+			errorApellidos = document.getElementById("errorApellidos");
 		}
 		apellidos.focus();
 		errores = true;
 	}
 
 	var direccion = document.getElementById("direccion");
+	var errorDireccion = document.getElementById("errorDireccion");
 	if (direccion.value.length == 0) {
-		if (!document.getElementById("errorDireccion")) {
+		if (!errorDireccion) {
 			var error = document.createElement("label");
 			error.style.color = "red";
 			error.id = "errorDireccion";
 			error.classList.add("etiquetasError");
 			var contenido = document.createTextNode("CAMPO REQUERIDO");
 			error.appendChild(contenido);
-			document.getElementById("DatosPers").insertBefore(error, direccion.nextElementSibling);
+			datosPers.insertBefore(error, direccion.nextElementSibling);
+			errorDireccion = document.getElementById("errorDireccion");
 		}
 		direccion.focus();
 		errores = true;
 	}
 
 	var cp = document.getElementById("cp");
+	var errorCp = document.getElementById("errorCp");
 	if (cp.value.length != 5 || isNaN(cp.value)) {
-		if (!document.getElementById("errorCp")) {
+		if (!errorCp) {
 			var error = document.createElement("label");
 			error.style.color = "red";
 			error.id = "errorCp";
 			error.classList.add("etiquetasError");
 			var contenido = document.createTextNode("LONGITUD REQUERIDA 5 DIGITOS");
 			error.appendChild(contenido);
-			document.getElementById("DatosPers").insertBefore(error, cp.nextElementSibling);
+			datosPers.insertBefore(error, cp.nextElementSibling);
+			errorCp = document.getElementById("errorCp");
 		}
 		cp.value = "";
 		cp.focus();
@@ -164,31 +178,36 @@ function validarFormulario(){
 	}
 
 	var provincia = document.getElementById("provincia");
+	var errorProvincia = document.getElementById("errorProvincia");
 	if (provincia.value.length == 0) {
-		if (!document.getElementById("errorProvincia")) {
+		if (!errorProvincia) {
 			var error = document.createElement("label");
 			error.style.color = "red";
 			error.id = "errorProvincia";
 			error.classList.add("etiquetasError");
 			var contenido = document.createTextNode("CAMPO REQUERIDO");
 			error.appendChild(contenido);
-			document.getElementById("DatosPers").insertBefore(error, provincia.nextElementSibling);
+			datosPers.insertBefore(error, provincia.nextElementSibling);
+			errorProvincia = document.getElementById("errorProvincia");
 		}
 		provincia.focus();
 		errores = true;
 	}
 
+	var datosBancarios = document.getElementById("DatosBancarios");
 
 	var CIban = document.getElementById("CIban");
+	var errorCIban = document.getElementById("errorCIban");
 	if (CIban.value.length != 2 || isNaN(CIban.value)) {
-		if (!document.getElementById("errorCIban")) {
+		if (!errorCIban) {
 			var error = document.createElement("label");
 			error.style.color = "red";
 			error.id = "errorCIban";
 			error.classList.add("etiquetasError");
 			var contenido = document.createTextNode("CAMPO REQUERIDO ");
 			error.appendChild(contenido);
-			document.getElementById("DatosBancarios").insertBefore(error, CIban.nextElementSibling);
+			datosBancarios.insertBefore(error, CIban.nextElementSibling);
+			errorCIban = document.getElementById("errorCIban");
 		}
 		CIban.value = "";
 		CIban.focus();
@@ -197,15 +216,17 @@ function validarFormulario(){
 
 
 	var entidad = document.getElementById("entidad");
+	var errorEntidad = document.getElementById("errorEntidad");
 	if (entidad.value.length != 4 || isNaN(entidad.value)) {
-		if (!document.getElementById("errorEntidad")) {
+		if (!errorEntidad) {
 			var error = document.createElement("label");
 			error.style.color = "red";
 			error.id = "errorEntidad";
 			error.classList.add("etiquetasError");
 			var contenido = document.createTextNode("CAMPO REQUERIDO ");
 			error.appendChild(contenido);
-			document.getElementById("DatosBancarios").insertBefore(error, entidad.nextElementSibling);
+			datosBancarios.insertBefore(error, entidad.nextElementSibling);
+			errorEntidad = document.getElementById("errorEntidad");
 		}
 		entidad.value = "";
 		entidad.focus();
@@ -214,15 +235,17 @@ function validarFormulario(){
 
 
 	var sucursal = document.getElementById("sucursal");
+	var errorSucursal = document.getElementById("errorSucursal");
 	if (sucursal.value.length != 4 || isNaN(sucursal.value)) {
-		if (!document.getElementById("errorSucursal")) {
+		if (!errorSucursal) {
 			var error = document.createElement("label");
 			error.style.color = "red";
 			error.id = "errorSucursal";
 			error.classList.add("etiquetasError");
 			var contenido = document.createTextNode("CAMPO REQUERIDO ");
 			error.appendChild(contenido);
-			document.getElementById("DatosBancarios").insertBefore(error, sucursal.nextElementSibling);
+			datosBancarios.insertBefore(error, sucursal.nextElementSibling);
+			errorSucursal = document.getElementById("errorSucursal");
 		}
 		sucursal.value = "";
 		sucursal.focus();
@@ -231,15 +254,17 @@ function validarFormulario(){
 
 
 	var Dc = document.getElementById("Dc");
+	var errorDc = document.getElementById("errorDc");
 	if (Dc.value.length != 2 || isNaN(Dc.value)) {
-		if (!document.getElementById("errorDc")) {
+		if (!errorDc) {
 			var error = document.createElement("label");
 			error.style.color = "red";
 			error.id = "errorDc";
 			error.classList.add("etiquetasError");
 			var contenido = document.createTextNode("CAMPO REQUERIDO ");
 			error.appendChild(contenido);
-			document.getElementById("DatosBancarios").insertBefore(error, Dc.nextElementSibling);
+			datosBancarios.insertBefore(error, Dc.nextElementSibling);
+			errorDc = document.getElementById("errorDc");
 		}
 		Dc.value = "";
 		Dc.focus();
@@ -247,15 +272,17 @@ function validarFormulario(){
 	}
 
 	var cuenta = document.getElementById("cuenta");
+	var errorCuenta = document.getElementById("errorCuenta");
 	if (cuenta.value.length != 10 || isNaN(cuenta.value)) {
-		if (!document.getElementById("errorCuenta")) {
+		if (!errorCuenta) {
 			var error = document.createElement("label");
 			error.style.color = "red";
 			error.id = "errorCuenta";
 			error.classList.add("etiquetasError");
 			var contenido = document.createTextNode("CAMPO REQUERIDO ");
 			error.appendChild(contenido);
-			document.getElementById("DatosBancarios").insertBefore(error, cuenta.nextElementSibling);
+			datosBancarios.insertBefore(error, cuenta.nextElementSibling);
+			errorCuenta = document.getElementById("errorCuenta");
 		}
 		cuenta.value = "";
 		cuenta.focus();
@@ -267,15 +294,16 @@ function validarFormulario(){
   //Comprobamos que el CP es valido
 	if(!comprobarCPvalido()){
 	//Si el codigo postal no es valido	
-		if(!document.getElementById("errorCp")){
+		if(!errorCp){
 		//Si no existe error previo indicando que el campo esta vacio, ponemos error que indica que el CP no existe.	
 			var error = document.createElement("label");
 			error.style.color = "red";
 			error.id = "errorCp";
 			error.classList.add("etiquetasError");
-			var contenido = document.createTextNode("EL CODIGO POSTAL "+ document.getElementById("cp").value +" NO EXISTE");
+			var contenido = document.createTextNode("EL CODIGO POSTAL "+ cp.value +" NO EXISTE");
 			error.appendChild(contenido);
-			document.getElementById("DatosPers").insertBefore(error, cp.nextElementSibling);
+			datosPers.insertBefore(error, cp.nextElementSibling);
+			errorCp = document.getElementById("errorCp");
 		}
 	}
 
@@ -288,20 +316,22 @@ function validarFormulario(){
 		error.classList.add("etiquetasError");
 		var contenido = document.createTextNode("PROVINCIA CORRECTA");
 		error.appendChild(contenido);
-		document.getElementById("DatosPers").insertBefore(error, provincia.nextElementSibling);
+		datosPers.insertBefore(error, provincia.nextElementSibling);
+		errorProvincia = document.getElementById("errorProvincia");
 	} else { 
 	//provincia no existe, comprobamos si hay error que lo habria generado la validacion de campo en blanco
 	//y si lo hay lo respetamos, sino es que la provincia escrita no existe
-		if (!document.getElementById("errorProvincia")){
+		if (!errorProvincia){
 			var error = document.createElement("label");
 			error.style.color = "red";
 			error.id = "errorProvincia";
 			error.classList.add("etiquetasError");
-			var contenido = document.createTextNode("LA PROVINCIA " + document.getElementById("provincia").value + " NO EXISTE");
+			var contenido = document.createTextNode("LA PROVINCIA " + provincia.value + " NO EXISTE");
 			error.appendChild(contenido);
-			document.getElementById("DatosPers").insertBefore(error, provincia.nextElementSibling);
-			document.getElementById("provincia").focus();
+			datosPers.insertBefore(error, provincia.nextElementSibling);
+			provincia.focus();
 			errores = true;
+			errorProvincia = document.getElementById("errorProvincia");
 		}
 	}
 
@@ -321,7 +351,7 @@ function validarFormulario(){
 				var contenido2 = document.createTextNode(" PERO NO CORRESPONDE CON EL CODIGO POSTAL INTRODUCIDO. LA PROVINCIA CORRECTA ES: " + provinciaCorrecta);
 			}
 			error2.appendChild(contenido2);
-			document.getElementById("DatosPers").insertBefore(error2, document.getElementById("errorProvincia").nextElementSibling);
+			datosPers.insertBefore(error2, errorProvincia.nextElementSibling);
 			errores = true;
 		}
 	}
@@ -330,7 +360,6 @@ function validarFormulario(){
 	if (errores) {
 		return false;
 	}
-
 }	
 
 //funcion para eliminar todas las etiquetas de errores que comparten la clase etiquetasError
@@ -344,17 +373,17 @@ function eliminarErrores(){
 
 //funcion que retorna true si la provincia introducida existe o false en caso contrario
 function comprobarExisteProvincia(){
-	var provincia = document.getElementById("provincia").value.toUpperCase();
+	var provinciaMayusculas = document.getElementById("provincia").value.toUpperCase();
 	var provinciaEncontrada = false;
 	codigospostales.forEach((valores, claves) => {
-		if(valores == provincia){
+		if(valores == provinciaMayusculas){
 				provinciaEncontrada = true;
 		}
 	});
 	return provinciaEncontrada;
 }
 
-//funcion que retorna true si provincia y codigo posta existen o false en caso contrario
+//funcion que retorna true si provincia y codigo postal existen o false en caso contrario
 function comprobarCoincidenProvYCp(){
 	var dosDigitos = parseInt(document.getElementById("cp").value.substring(0,2));
 	var dosDigitosCP = codigospostales.get(dosDigitos);
@@ -368,7 +397,8 @@ function comprobarCoincidenProvYCp(){
 //funcion que comprueba si el rango de los dos primeros digitos del codigo postal estan en los esperados y devuelve true si es asi o false
 //en caso contrario
 function comprobarCPvalido(){
-	if(parseInt(document.getElementById("cp").value.substring(0,2)) < 1 || parseInt(document.getElementById("cp").value.substring(0,2)) > 52){
+	var cp = document.getElementById("cp");
+	if(parseInt(cp.value.substring(0,2)) < 1 || parseInt(cp.value.substring(0,2)) > 52){
 		return false;
 	}else{
 		return true;
